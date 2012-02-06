@@ -12,9 +12,7 @@ public class Hand {
 	private List<State> states;
 	private Chips netChips;
 	private int button;
-	private int sBlind;
 
-	private int bBlind;
 	public Hand(State initState, Chips netChips){
 		this.netChips = netChips;
 		states = new ArrayList<State>();
@@ -43,24 +41,8 @@ public class Hand {
 	public int getButton() {
 		return button;
 	}
-
 	public void setButton(int button) {
 		this.button = button;
 	}
 
-	public int getSBlind() {
-		return sBlind;
-	}
-
-	public void setSBlind(int sBlind) {
-		this.sBlind = sBlind;
-	}
-
-	public int getBBlind() {
-		return bBlind;
-	}
-
-	public void setbBlind(int bBlind) {
-		this.bBlind = bBlind;
-	}
 }

@@ -95,8 +95,8 @@ public class Controller extends JPanel {
 			jumpBox.setText(Integer.toString(matchReplayer.getHandIndex()+1));
 			
 			pokerReplayer.setPlayers(matchReplayer.getSeats());
-			System.out.println("Displaying players!");
 			pokerReplayer.displayStates(matchReplayer.getStates());
+			pokerReplayer.setButtons(matchReplayer.getButtons());
 		}
 	}
 	

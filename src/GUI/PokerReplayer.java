@@ -67,7 +67,7 @@ public class PokerReplayer extends JFrame {
 			pokerTables.get(i).displayState(states.get(i));
 		}
 	}
-	private void launchBrowser(){
+	private void launchBrowser(){	
 		matchLoader.setVisible(true);
 	}
 	public MatchLoader getMatchLoader() {
@@ -86,5 +86,11 @@ public class PokerReplayer extends JFrame {
 		for(int i=0; i<seats.size(); i++){
 			pokerTables.get(i).setPlayers(seats.get(i));
 		}
+	}
+	public void setButtons(List<Integer> buttons) {
+		for(int i=0; i<buttons.size(); i++){
+			pokerTables.get(i).setButton(buttons.get(i));
+		}
+		
 	}
 }

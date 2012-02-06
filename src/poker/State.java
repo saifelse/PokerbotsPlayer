@@ -56,10 +56,9 @@ public class State {
 	public String toString() {
 		return "State(action=" + action + ",chips=" + chips + ",bets=" + bets
 				+ ",pot=" + pot + ",chipsToCall=" + chipsToCall + ",dealt="
-				+ Arrays.toString(dealt)+ ",p1="
-				+ Arrays.toString(p1)+ ",p2="
-				+ Arrays.toString(p2)+ ",p3="
-				+ Arrays.toString(p3)+")";
+				+ Arrays.toString(dealt) + ",p1=" + Arrays.toString(p1)
+				+ ",p2=" + Arrays.toString(p2) + ",p3=" + Arrays.toString(p3)
+				+ ")";
 	}
 
 	public Card[] getP1() {

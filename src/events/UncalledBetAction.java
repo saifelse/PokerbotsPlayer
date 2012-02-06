@@ -14,7 +14,9 @@ public class UncalledBetAction extends PlayerAction {
 	// chips+, bet-, pot0, call0, dealt0
 	@Override
 	public State applyToState(State s) {
-		return new State(this, s.getChips().mod(getPID(), chips), s.getBets(), s.getPot(),
+		int ret = s.getBets().get(getPID());
+		
+		return new State(this, s.getChips().mod(getPID(), chips), s.getBets().set(getPID(), 0), s.getPot(),
 				s.getChipsToCall(), s.getDealt(), s.getP1(), s.getP2(), s.getP3());
 	}
 }

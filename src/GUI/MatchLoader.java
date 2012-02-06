@@ -58,6 +58,45 @@ public class MatchLoader extends JFrame {
 		updateStates();	
 		
 		setupWindow();
+		
+		
+		
+		
+		
+		
+		new Thread(new Runnable(){
+
+			@Override
+			public void run() {
+				MatchReplayer mr = null;
+				String error = "Unexpected error.";
+				try {
+					file1 = new File("Match #1 - FoldBot vs. Halos vs. VictoriousSecret.txt");
+					file2 = new File("Match #1 - Halos vs. VictoriousSecret vs. FoldBot.txt");
+					file3 = new File("Match #1 - VictoriousSecret vs. FoldBot vs. Halos.txt");
+					mr = getReplayer(file1, file2, file3);
+				} catch (FileNotFoundException e1) {
+					error = e1.getMessage();
+				} catch (IOException e1) {
+					error = e1.getMessage();
+				} catch (UnparseableStringException e1){
+					error = e1.getMessage();
+				} finally {
+					if(mr != null){
+						final MatchReplayer replayer = mr;
+						SwingUtilities.invokeLater(new Runnable(){
+							@Override
+							public void run() {
+								pokerReplayer.getController().setMatchReplayer(replayer);
+							}
+						});
+					}else {
+						JOptionPane.showMessageDialog(MatchLoader.this, error);
+					}
+				}
+			}
+			
+		}).start();
 	}
 	private void setupWindow(){
 		setSize(600, 150);

@@ -22,13 +22,14 @@ public class PokerTable extends JPanel {
 	 * 
 	 */
 	
-	private static final int CARD_WIDTH = 50;
-	private static final int CARD_HEIGHT = 70;
+	private static final int CARD_WIDTH = 38;
+	private static final int CARD_HEIGHT = 54;
 	
 	private static final long serialVersionUID = 1L;
 	private final JLabel background;
 	private BufferedImage table;
 	
+	private JLabel pot;
 	private List<JLabel> dealtCards;
 	private JLabel action;
 	private List<Player> players;
@@ -43,6 +44,7 @@ public class PokerTable extends JPanel {
 		background = new JLabel(new ImageIcon(table));
 		action = new JLabel();
 		dealtCards = new ArrayList<JLabel>();
+		pot = new JLabel();
 		for(int i=0; i<5; i++){
 			dealtCards.add(new JLabel());
 		}
@@ -59,26 +61,28 @@ public class PokerTable extends JPanel {
 		setLayout(null);
 		Insets insets = getInsets();
 		
+		pot.setBounds(insets.left+280+(CARD_WIDTH+5)*3, insets.top+150+CARD_HEIGHT, 100, 20);
+		add(pot);
+		
 		action.setBounds(insets.left, insets.top, 400, 20);
 		add(action);
 		
 		background.setBounds(insets.left, insets.top, table.getWidth(), table.getHeight());
 		add(background);
 		for(int i=0; i<5; i++){
-			dealtCards.get(i).setBounds(insets.left+300+(CARD_WIDTH+5)*i, insets.top+150, CARD_WIDTH, CARD_HEIGHT);
+			dealtCards.get(i).setBounds(insets.left+280+(CARD_WIDTH+5)*i, insets.top+150, CARD_WIDTH, CARD_HEIGHT);
 			add(dealtCards.get(i));
 		}
 
 		for(int i=0;i<3;i++){
 			Player p = players.get(i);
 			if(i==0){
-				p.setBounds(insets.left+500, insets.top+150, 400, 400);
+				p.setBounds(insets.left+565, insets.top+150, 400, 400);
 			}else if(i==1){
 				p.setBounds(insets.left+125, insets.top+150, 400, 400);
 			}else{
 				p.setBounds(insets.left+310, insets.top+250, 400, 400);
 			}
-			System.out.println(p.getWidth()+", "+p.getHeight());
 			add(p);
 		}
 		int compsMax = 9;
@@ -116,7 +120,6 @@ public class PokerTable extends JPanel {
 		pcards.add(state.getP3());
 		
 		for(int i=0;i<players.size(); i++){
-			System.out.println(""+i+". "+players.get(i));
 			Player p = players.get(i);
 			p.setCards(pcards.get(i));
 		}
@@ -137,13 +140,27 @@ public class PokerTable extends JPanel {
 			if(cardImg != null)
 				dealtCards.get(i).setIcon(new ImageIcon(cardImg));
 		}
+		
+		// Update bets.
+		// Update chips.
+		
+		for(int i=0; i<players.size(); i++){
+			players.get(i).setBet(state.getBets().get(i));
+			players.get(i).setChips(state.getChips().get(i));
+		}
+		pot.setText("Pot: "+state.getPot());
 	}
 	public void setPlayers(Map<String, Integer> map) {
-		System.out.println("Name in map: "+map.keySet().size()+": ");
 		for(String name : map.keySet()){
-			System.out.println(name);
 			updatePlayer(map.get(name), name, 0, 0, new Card[0], false);
 		}
+	}
+	public void setButton(Integer pid) {
+		for(int i=0; i < players.size(); i++){
+			players.get(i).setIsDealer(i == pid);
+		}
+		// TODO Auto-generated method stub
+		
 	}
 	
 }

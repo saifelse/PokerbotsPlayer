@@ -89,6 +89,7 @@ public class HandHistoryParser {
 			e.printStackTrace();
 		}*/
 	}
+	
 	public Match parse() throws IOException {
 		Map<String, Integer> seats = new HashMap<String, Integer>();
 		List<Hand> hands = new ArrayList<Hand>();
@@ -118,26 +119,35 @@ public class HandHistoryParser {
 			}
 			m = p_seat1.matcher(line);
 			if(m.matches()){
-				seats.put(m.group(2), 0);
+				if(!seats.containsKey(m.group(2)))
+						seats.put(m.group(2), 0);
+				int virtualSeat = seats.get(m.group(2));
 				String b = m.group(1);
 				int chips = Integer.parseInt(m.group(3));
-				h.setNetChips(h.getNetChips().set(0, chips));
+				h.setNetChips(h.getNetChips().set(virtualSeat, chips));
+				if(b.equals("Button")) h.setButton(virtualSeat);
 				continue;
 			}
 			m = p_seat2.matcher(line);
 			if(m.matches()){
-				seats.put(m.group(2), 1);
+				if(!seats.containsKey(m.group(2)))
+					seats.put(m.group(2), 1);
+				int virtualSeat = seats.get(m.group(2));
 				String b = m.group(1);
 				int chips = Integer.parseInt(m.group(3));
-				h.setNetChips(h.getNetChips().set(1, chips));
+				h.setNetChips(h.getNetChips().set(virtualSeat, chips));
+				if(b.equals("Button")) h.setButton(virtualSeat);
 				continue;
 			}
 			m = p_seat3.matcher(line);
 			if(m.matches()){
-				seats.put(m.group(2), 2);
+				if(!seats.containsKey(m.group(2)))
+					seats.put(m.group(2), 2);
+				int virtualSeat = seats.get(m.group(2));
 				String b = m.group(1);
 				int chips = Integer.parseInt(m.group(3));
-				h.setNetChips(h.getNetChips().set(2, chips));
+				h.setNetChips(h.getNetChips().set(virtualSeat, chips));
+				if(b.equals("Button")) h.setButton(virtualSeat);
 				continue;
 			}		
 			m = p_blind.matcher(line);

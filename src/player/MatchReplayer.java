@@ -97,6 +97,14 @@ public class MatchReplayer {
 		}
 		return scores;
 	}
+	public List<Integer> getButtons(){
+		List<Integer> buttons = new ArrayList<Integer>();
+		for(int i=0; i<handReplayers.size(); i++){
+			HandReplayer hr = handReplayers.get(i);
+			buttons.add(hr.getHand().getButton());
+		}
+		return buttons;
+	}
 	public List<State> getStates(){
 		List<State> states = new ArrayList<State>();
 		for(HandReplayer hr : handReplayers){

@@ -1,5 +1,7 @@
 package GUI;
 
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Insets;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -19,8 +21,8 @@ public class Player extends JPanel {
 	 * 
 	 */
 	
-	private static final int CARD_WIDTH = 50;
-	private static final int CARD_HEIGHT = 70;
+	private static final int CARD_WIDTH = 38;
+	private static final int CARD_HEIGHT = 54;
 	
 	private static final long serialVersionUID = 1L;
 	private final JLabel nameLabel;
@@ -42,24 +44,34 @@ public class Player extends JPanel {
 		}
 		setOpaque(false);
 		initComponents();
+		setIsDealer(true);
 	}
 	
 	private void initComponents(){
 		setLayout(null);
 		Insets insets = getInsets();
+		
+		dealerButton.setBounds(insets.left+30, insets.top, 22, 20);
+		add(dealerButton);
+		
 		nameLabel.setBounds(insets.left, insets.top, 200, 50);
 		add(nameLabel);
+		chipStack.setBounds(insets.left, insets.top+20, 200, 50);
+		add(chipStack);
+		bet.setBounds(insets.left, insets.top+40, 200, 50);
+		add(bet);
 		for(int i=0; i<2; i++){
-			cards.get(i).setBounds(insets.left+(CARD_WIDTH+5)*i, insets.top+20, CARD_WIDTH, CARD_HEIGHT);
+			cards.get(i).setBounds(insets.left+(CARD_WIDTH+5)*i, insets.top+40, CARD_WIDTH, CARD_HEIGHT);
 			add(cards.get(i));
 		}
+		
 	}
 	
 	public void setIsDealer(boolean b) {
 		if(b){
 			BufferedImage dealerImg = null;
 			try {
-				dealerImg = ImageIO.read(new File("misc/button.gif"));
+				dealerImg = ImageIO.read(new File("DealerControl.gif"));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -83,7 +95,6 @@ public class Player extends JPanel {
 		bet.setText(""+chips+" being bet.");
 	}
 	public void setCards(Card[] cards) {
-		System.out.println("Drawing cards..."+cards.length);
 		// Clear out
 		for(JLabel c : this.cards){
 			c.setIcon(null);
@@ -97,8 +108,15 @@ public class Player extends JPanel {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			if(cardImg != null)
-				this.cards.get(i).setIcon(new ImageIcon(cardImg));
+			if(cardImg != null){
+				BufferedImage bi = new BufferedImage(cardImg.getWidth(null), cardImg.getHeight(null), BufferedImage.TYPE_INT_ARGB);
+				Graphics g = bi.createGraphics();
+				g.drawImage(cardImg, 0, 0, CARD_WIDTH, CARD_HEIGHT, null);
+				
+				this.cards.get(i).setIcon(new ImageIcon(bi));
+				
+			}
+			
 		}
 	}
 }

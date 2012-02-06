@@ -12,8 +12,8 @@ public class CallAction extends PlayerAction {
 	// chips-, bet+, pot0, call0
 	@Override
 	public State applyToState(State s) {
-		int chips = s.getChipsToCall();
+		int chips = s.getChipsToCall()-s.getBets().get(getPID());
 		return new State(this, s.getChips().mod(getPID(), -chips), s.getBets()
-				.mod(getPID(), chips), s.getPot(), chips, s.getDealt(), s.getP1(), s.getP2(), s.getP3());
+				.mod(getPID(), chips), s.getPot(), s.getChipsToCall(), s.getDealt(), s.getP1(), s.getP2(), s.getP3());
 	}
 }
