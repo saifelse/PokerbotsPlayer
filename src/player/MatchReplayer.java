@@ -92,7 +92,6 @@ public class MatchReplayer {
 		int numberOfHands = listOfHands.get(0).getHands().size();
 		for(String username : getSeats().get(0).keySet()){
 			netScores.put(username, new int[numberOfHands]);
-			System.out.println(username);
 		}
 		for(int i=0; i < listOfHands.size(); i++){
 			Match m = listOfHands.get(i);
@@ -101,11 +100,7 @@ public class MatchReplayer {
 			for(int j=0; j < hands.size(); j++){
 				Chips net = hands.get(j).getNetChips();
 				for(String username : netScores.keySet()){
-					System.out.println(seatMap.keySet().toString()+"? "+username);
-					int val = netScores.get(username)[j];
-					int seatInd = seatMap.get(username);
-					int valAdd = net.get(seatInd);
-					netScores.get(username)[j] += seatInd;
+					netScores.get(username)[j] += net.get(seatMap.get(username));
 				}
 			}
 		}

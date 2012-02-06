@@ -98,7 +98,6 @@ public class Controller extends JPanel {
 			pokerReplayer.setPlayers(matchReplayer.getSeats());
 			pokerReplayer.displayStates(matchReplayer.getStates());
 			pokerReplayer.setButtons(matchReplayer.getButtons());
-			pokerReplayer.getGraph().setHand(matchReplayer.getHandIndex());
 		}
 	}
 	
@@ -108,8 +107,10 @@ public class Controller extends JPanel {
 			public void actionPerformed(ActionEvent e) {
 				if(e.getSource() == prevHand){
 					matchReplayer.prevHand();
+					pokerReplayer.getGraph().setHand(matchReplayer.getHandIndex());
 				}else if(e.getSource() == nextHand){
 					matchReplayer.nextHand();
+					pokerReplayer.getGraph().setHand(matchReplayer.getHandIndex());
 				}else if(e.getSource() == prevStep){
 					matchReplayer.prevStep();
 				}else if(e.getSource() == nextStep){
@@ -122,6 +123,7 @@ public class Controller extends JPanel {
 					try {
 						int handIndex = Integer.parseInt(jumpBox.getText())-1;
 						matchReplayer.jumpToHand(handIndex);
+						pokerReplayer.getGraph().setHand(matchReplayer.getHandIndex());
 					} catch (NumberFormatException e1){
 						JOptionPane.showMessageDialog(Controller.this, "Please enter a valid hand number.");
 						return;
