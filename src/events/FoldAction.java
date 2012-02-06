@@ -4,8 +4,8 @@ import poker.State;
 
 public class FoldAction extends PlayerAction {
 
-	public FoldAction(int pid) {
-		super(ActionType.FOLD, pid);
+	public FoldAction(int pid, String line) {
+		super(ActionType.FOLD, pid, line);
 	}
 
 	// chips0, bet0, pot0, call0, dealt0

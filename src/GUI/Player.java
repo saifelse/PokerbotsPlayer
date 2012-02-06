@@ -29,6 +29,7 @@ public class Player extends JPanel {
 	private final JLabel bet;
 	private final List<JLabel> cards;
 	
+	private String playerName;
 	
 	public Player(){
 		nameLabel = new JLabel("");
@@ -49,7 +50,7 @@ public class Player extends JPanel {
 		nameLabel.setBounds(insets.left, insets.top, 200, 50);
 		add(nameLabel);
 		for(int i=0; i<2; i++){
-			cards.get(i).setBounds(insets.left+300+(CARD_WIDTH+5)*i, insets.top+150, CARD_WIDTH, CARD_HEIGHT);
+			cards.get(i).setBounds(insets.left+(CARD_WIDTH+5)*i, insets.top+20, CARD_WIDTH, CARD_HEIGHT);
 			add(cards.get(i));
 		}
 	}
@@ -69,8 +70,11 @@ public class Player extends JPanel {
 		}
 	}
 	public void setName(String name){
-		System.out.println("My name is "+name);
+		playerName = name;
 		nameLabel.setText(name);
+	}
+	public String getPlayerName(){
+		return playerName;
 	}
 	public void setChips(int chips){
 		chipStack.setText(""+chips);
@@ -79,6 +83,13 @@ public class Player extends JPanel {
 		bet.setText(""+chips+" being bet.");
 	}
 	public void setCards(Card[] cards) {
+		System.out.println("Drawing cards..."+cards.length);
+		// Clear out
+		for(JLabel c : this.cards){
+			c.setIcon(null);
+		}
+
+		// Draw
 		for(int i=0;i<cards.length;i++){
 			BufferedImage cardImg = null;
 			try {

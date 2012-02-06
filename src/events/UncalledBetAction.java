@@ -4,8 +4,8 @@ import poker.State;
 
 public class UncalledBetAction extends PlayerAction {
 	private int chips;
-	public UncalledBetAction(int pid, int chips){
-		super(ActionType.BET, pid);
+	public UncalledBetAction(int pid, int chips, String line){
+		super(ActionType.BET, pid, line);
 		this.chips = chips;
 	}
 	public int getChips(){

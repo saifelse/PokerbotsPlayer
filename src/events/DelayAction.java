@@ -4,8 +4,8 @@ import poker.State;
 
 public class DelayAction extends Action {
 
-	public DelayAction() {
-		super(ActionType.DELAY);
+	public DelayAction(String line) {
+		super(ActionType.DELAY, line);
 	}
 	// chips0, bet0, pot0, call0
 	@Override

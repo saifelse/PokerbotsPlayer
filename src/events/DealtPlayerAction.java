@@ -7,8 +7,8 @@ import poker.State;
 
 public class DealtPlayerAction extends PlayerAction {
 	private final Card[] cards;
-	public DealtPlayerAction(int pid, Card[] cards){
-		super(ActionType.DEALT, pid);
+	public DealtPlayerAction(int pid, Card[] cards, String line){
+		super(ActionType.DEALT, pid, line);
 		this.cards = cards;
 	}
 	public Card[] getCards(){

@@ -5,8 +5,8 @@ import poker.State;
 public class BlindAction extends PlayerAction {
 	private int chips;
 
-	public BlindAction(int pid, int chips) {
-		super(ActionType.BLIND, pid);
+	public BlindAction(int pid, int chips, String line) {
+		super(ActionType.BLIND, pid, line);
 		this.chips = chips;
 	}
 

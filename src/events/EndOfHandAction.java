@@ -4,8 +4,8 @@ import poker.State;
 
 public class EndOfHandAction extends Action {
 
-	public EndOfHandAction() {
-		super(ActionType.END_OF_HAND);
+	public EndOfHandAction(String line) {
+		super(ActionType.END_OF_HAND, line);
 	}
 
 	// chips0, bet0, pot0, call0, dealt0
