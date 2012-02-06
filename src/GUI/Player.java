@@ -31,7 +31,7 @@ public class Player extends JPanel {
 	
 	
 	public Player(){
-		nameLabel = new JLabel();
+		nameLabel = new JLabel("");
 		dealerButton = new JLabel();
 		chipStack  = new JLabel();
 		bet = new JLabel();
@@ -39,13 +39,14 @@ public class Player extends JPanel {
 		for(int i=0;i<2;i++){
 			cards.add(new JLabel());
 		}
+		setOpaque(false);
 		initComponents();
 	}
 	
 	private void initComponents(){
 		setLayout(null);
 		Insets insets = getInsets();
-		nameLabel.setBounds(insets.left, insets.top, nameLabel.getWidth(), nameLabel.getHeight());
+		nameLabel.setBounds(insets.left, insets.top, 200, 50);
 		add(nameLabel);
 		for(int i=0; i<2; i++){
 			cards.get(i).setBounds(insets.left+300+(CARD_WIDTH+5)*i, insets.top+150, CARD_WIDTH, CARD_HEIGHT);

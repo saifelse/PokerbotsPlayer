@@ -68,12 +68,13 @@ public class PokerTable extends JPanel {
 		for(int i=0;i<3;i++){
 			Player p = players.get(i);
 			if(i==0){
-				p.setBounds(insets.left+400, insets.top+150, p.getWidth(), p.getHeight());
+				p.setBounds(insets.left+500, insets.top+150, 400, 400);
 			}else if(i==1){
-				p.setBounds(insets.left+100, insets.top+150, p.getWidth(), p.getHeight());
+				p.setBounds(insets.left+120, insets.top+150, 400, 400);
 			}else{
-				p.setBounds(insets.left+250, insets.top+300, p.getWidth(), p.getHeight());
+				p.setBounds(insets.left+315, insets.top+250, 400, 400);
 			}
+			System.out.println(p.getWidth()+", "+p.getHeight());
 			add(p);
 		}
 		
