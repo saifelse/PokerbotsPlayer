@@ -98,6 +98,7 @@ public class Controller extends JPanel {
 			pokerReplayer.setPlayers(matchReplayer.getSeats());
 			pokerReplayer.displayStates(matchReplayer.getStates());
 			pokerReplayer.setButtons(matchReplayer.getButtons());
+			pokerReplayer.getGraph().setHand(matchReplayer.getHandIndex());
 		}
 	}
 	
