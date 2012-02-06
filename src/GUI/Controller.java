@@ -82,6 +82,7 @@ public class Controller extends JPanel {
 	}
 	public void setMatchReplayer(MatchReplayer mr){
 		matchReplayer = mr;
+		pokerReplayer.getGraph().addData(mr.getScores());
 		syncWithReplayer();
 	}
 	private void syncWithReplayer(){

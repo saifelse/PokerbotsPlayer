@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import poker.Chips;
 import poker.Hand;
 import poker.Match;
 import poker.State;
@@ -86,7 +87,29 @@ public class MatchReplayer {
 		}
 		return seats;
 	}
-	public Map<String, Integer> getScores(){
+	public Map<String, int[]> getScores(){
+		Map<String, int[]> netScores = new HashMap<String, int[]>();
+		int numberOfHands = listOfHands.get(0).getHands().size();
+		for(String username : getSeats().get(0).keySet()){
+			netScores.put(username, new int[numberOfHands]);
+			System.out.println(username);
+		}
+		for(int i=0; i < listOfHands.size(); i++){
+			Match m = listOfHands.get(i);
+			Map<String, Integer> seatMap = m.getSeat();
+			List<Hand> hands = m.getHands();
+			for(int j=0; j < hands.size(); j++){
+				Chips net = hands.get(j).getNetChips();
+				for(String username : netScores.keySet()){
+					System.out.println(seatMap.keySet().toString()+"? "+username);
+					int val = netScores.get(username)[j];
+					int seatInd = seatMap.get(username);
+					int valAdd = net.get(seatInd);
+					netScores.get(username)[j] += seatInd;
+				}
+			}
+		}
+		/*
 		Map<String, Integer> scores = new HashMap<String, Integer>();
 		for(String name : listOfHands.get(0).getSeat().keySet()){
 			int score = 0;
@@ -94,8 +117,8 @@ public class MatchReplayer {
 				score += handReplayers.get(i).getHand().getNetChips().get(listOfHands.get(i).getSeat().get(name));
 			}
 			scores.put(name, score);
-		}
-		return scores;
+		}*/
+		return netScores;
 	}
 	public List<Integer> getButtons(){
 		List<Integer> buttons = new ArrayList<Integer>();

@@ -62,7 +62,7 @@ public class MatchLoader extends JFrame {
 		
 		
 		
-		
+		/*
 		
 		new Thread(new Runnable(){
 
@@ -97,6 +97,7 @@ public class MatchLoader extends JFrame {
 			}
 			
 		}).start();
+		*/
 	}
 	private void setupWindow(){
 		setSize(600, 150);
@@ -153,7 +154,7 @@ public class MatchLoader extends JFrame {
 				}
 				if(e.getSource() == load){
 					// Shouldn't be in the UI thread.
-					
+					System.out.println("Loading...");
 					new Thread(new Runnable(){
 
 						@Override
