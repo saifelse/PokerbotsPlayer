@@ -5,8 +5,8 @@ import poker.State;
 public class WinAction extends PlayerAction {
 	private int chips;
 
-	public WinAction(int pid, int chips) {
-		super(ActionType.WIN, pid);
+	public WinAction(int pid, int chips, String line) {
+		super(ActionType.WIN, pid, line);
 		this.chips = chips;
 	}
 

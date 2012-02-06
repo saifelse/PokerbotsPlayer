@@ -6,8 +6,8 @@ import poker.State;
 
 public class DealtRiverAction extends Action {
 	private final Card[] cards;
-	public DealtRiverAction(Card[] cards){
-		super(ActionType.RIVER);
+	public DealtRiverAction(Card[] cards, String line){
+		super(ActionType.RIVER, line);
 		this.cards = cards;
 	}
 	public Card[] getCards(){

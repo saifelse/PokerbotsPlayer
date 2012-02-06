@@ -5,8 +5,8 @@ import poker.State;
 public class RaiseAction extends PlayerAction {
 	private int chips;
 
-	public RaiseAction(int pid, int chips) {
-		super(ActionType.RAISE, pid);
+	public RaiseAction(int pid, int chips, String line) {
+		super(ActionType.RAISE, pid, line);
 		this.chips = chips;
 	}
 

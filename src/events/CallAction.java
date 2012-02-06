@@ -4,8 +4,8 @@ import poker.State;
 
 public class CallAction extends PlayerAction {
 	
-	public CallAction(int pid){
-		super(ActionType.CALL, pid);
+	public CallAction(int pid, String line){
+		super(ActionType.CALL, pid, line);
 		
 	}
 

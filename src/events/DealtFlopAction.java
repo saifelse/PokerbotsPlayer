@@ -6,8 +6,8 @@ import poker.State;
 
 public class DealtFlopAction extends Action {
 	private final Card[] cards;
-	public DealtFlopAction(Card[] cards){
-		super(ActionType.FLOP);
+	public DealtFlopAction(Card[] cards, String line){
+		super(ActionType.FLOP, line);
 		this.cards = cards;
 	}
 	public Card[] getCards(){

@@ -112,7 +112,7 @@ public class HandHistoryParser {
 			
 			m = p_hand_end.matcher(line);
 			if(m.matches()){
-				h.addAction(new EndOfHandAction());
+				h.addAction(new EndOfHandAction(line));
 				hands.add(h);
 				continue;
 			}
@@ -144,53 +144,53 @@ public class HandHistoryParser {
 			if(m.matches()){
 				int pid = seats.get(m.group(1));
 				int chips = Integer.parseInt(m.group(2));
-				h.addAction(new BlindAction(pid, chips));
+				h.addAction(new BlindAction(pid, chips, line));
 				continue;
 			}
 			m = p_bets.matcher(line);
 			if(m.matches()){
 				int pid = seats.get(m.group(1));
 				int chips = Integer.parseInt(m.group(2));
-				h.addAction(new BetAction(pid, chips));
+				h.addAction(new BetAction(pid, chips, line));
 				continue;
 			}
 			m = p_calls.matcher(line);
 			if(m.matches()){
 				int pid = seats.get(m.group(1));
-				h.addAction(new CallAction(pid));
+				h.addAction(new CallAction(pid, line));
 				continue;
 			}
 			m = p_raises.matcher(line);
 			if(m.matches()){
 				int pid = seats.get(m.group(1));
 				int chips = Integer.parseInt(m.group(2));
-				h.addAction(new RaiseAction(pid, chips));
+				h.addAction(new RaiseAction(pid, chips, line));
 				continue;
 			}
 			m = p_checks.matcher(line);
 			if(m.matches()){
 				int pid = seats.get(m.group(1));
-				h.addAction(new CheckAction(pid));
+				h.addAction(new CheckAction(pid, line));
 				continue;
 			}
 			m = p_folds.matcher(line);
 			if(m.matches()){
 				int pid = seats.get(m.group(1));
-				h.addAction(new FoldAction(pid));
+				h.addAction(new FoldAction(pid, line));
 				continue;
 			}
 			m = p_wins.matcher(line);
 			if(m.matches()){
 				int pid = seats.get(m.group(1));
 				int chips = Integer.parseInt(m.group(2));
-				h.addAction(new WinAction(pid, chips));
+				h.addAction(new WinAction(pid, chips, line));
 				continue;
 			}
 			m = p_ties.matcher(line);
 			if(m.matches()){
 				int pid = seats.get(m.group(1));
 				int chips = Integer.parseInt(m.group(2));
-				h.addAction(new TieAction(pid, chips));
+				h.addAction(new TieAction(pid, chips, line));
 				continue;
 			}
 			
@@ -198,32 +198,32 @@ public class HandHistoryParser {
 			if(m.matches()){
 				int pid = seats.get(m.group(1));
 				Card[] cards = new Card[]{Card.get(m.group(2)), Card.get(m.group(3))};
-				h.addAction(new DealtPlayerAction(pid, cards));
+				h.addAction(new DealtPlayerAction(pid, cards, line));
 				continue;
 			}
 			m = p_deal_flop.matcher(line);
 			if(m.matches()){
 				Card[] cards = new Card[]{Card.get(m.group(1)), Card.get(m.group(2)), Card.get(m.group(3))};
-				h.addAction(new DealtFlopAction(cards));
+				h.addAction(new DealtFlopAction(cards, line));
 				continue;
 			}
 			m = p_deal_turn.matcher(line);
 			if(m.matches()){
 				Card[] cards = new Card[]{Card.get(m.group(1)), Card.get(m.group(2)), Card.get(m.group(3)), Card.get(m.group(4))};
-				h.addAction(new DealtTurnAction(cards));
+				h.addAction(new DealtTurnAction(cards, line));
 				continue;
 			}
 			m = p_deal_river.matcher(line);
 			if(m.matches()){
 				Card[] cards = new Card[]{Card.get(m.group(1)), Card.get(m.group(2)), Card.get(m.group(3)), Card.get(m.group(4)), Card.get(m.group(5))};
-				h.addAction(new DealtRiverAction(cards));
+				h.addAction(new DealtRiverAction(cards, line));
 				continue;
 			}
 			m = p_uncalled.matcher(line);
 			if(m.matches()){
 				int pid = seats.get(m.group(2));
 				int chips = Integer.parseInt(m.group(1));
-				h.addAction(new UncalledBetAction(pid, chips));
+				h.addAction(new UncalledBetAction(pid, chips, line));
 				continue;
 			}
 			m = p_shows.matcher(line);
@@ -231,7 +231,7 @@ public class HandHistoryParser {
 				int pid = seats.get(m.group(1));
 				String rank = m.group(4);
 				Card[] cards = new Card[]{Card.get(m.group(2)), Card.get(m.group(3))};
-				h.addAction(new ShowAction(pid, cards, rank));
+				h.addAction(new ShowAction(pid, cards, rank, line));
 				continue;
 			}
 

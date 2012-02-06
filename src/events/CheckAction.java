@@ -4,8 +4,8 @@ import poker.State;
 
 public class CheckAction extends PlayerAction {
 
-	public CheckAction(int pid) {
-		super(ActionType.CHECK, pid);
+	public CheckAction(int pid, String line) {
+		super(ActionType.CHECK, pid, line);
 	}
 
 	// chips0, bet0, pot0, call0

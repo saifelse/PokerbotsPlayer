@@ -7,8 +7,8 @@ import poker.State;
 public class ShowAction extends PlayerAction {
 	private final Card[] cards;
 	private final String rank;
-	public ShowAction(int pid, Card[] cards, String rank) {
-		super(ActionType.WIN, pid);
+	public ShowAction(int pid, Card[] cards, String rank, String line) {
+		super(ActionType.WIN, pid, line);
 		this.cards = cards;
 		this.rank = rank;
 	}

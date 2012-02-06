@@ -5,8 +5,8 @@ import poker.State;
 public class TieAction extends PlayerAction {
 	private int chips;
 
-	public TieAction(int pid, int chips) {
-		super(ActionType.WIN, pid);
+	public TieAction(int pid, int chips, String line) {
+		super(ActionType.WIN, pid, line);
 		this.chips = chips;
 	}
 

@@ -30,7 +30,7 @@ public class PokerTable extends JPanel {
 	private BufferedImage table;
 	
 	private List<JLabel> dealtCards;
-	
+	private JLabel action;
 	private List<Player> players;
 	/*
 	private List<JLabel> p1;
@@ -41,13 +41,13 @@ public class PokerTable extends JPanel {
 	public PokerTable(PokerReplayer pr) throws IOException {
 		table = ImageIO.read(new File("table.jpg"));
 		background = new JLabel(new ImageIcon(table));
-		
+		action = new JLabel();
 		dealtCards = new ArrayList<JLabel>();
 		for(int i=0; i<5; i++){
 			dealtCards.add(new JLabel());
 		}
 		players = new ArrayList<Player>();
-		for(int i=0; i<5; i++){
+		for(int i=0; i<3; i++){
 			players.add(new Player());
 		}
 		
@@ -58,6 +58,10 @@ public class PokerTable extends JPanel {
 	public void initComponents(){
 		setLayout(null);
 		Insets insets = getInsets();
+		
+		action.setBounds(insets.left, insets.top, 400, 20);
+		add(action);
+		
 		background.setBounds(insets.left, insets.top, table.getWidth(), table.getHeight());
 		add(background);
 		for(int i=0; i<5; i++){
@@ -68,22 +72,24 @@ public class PokerTable extends JPanel {
 		for(int i=0;i<3;i++){
 			Player p = players.get(i);
 			if(i==0){
-				p.setBounds(insets.left+400, insets.top+150, p.getWidth(), p.getHeight());
+				p.setBounds(insets.left+500, insets.top+150, 400, 400);
 			}else if(i==1){
-				p.setBounds(insets.left+100, insets.top+150, p.getWidth(), p.getHeight());
+				p.setBounds(insets.left+125, insets.top+150, 400, 400);
 			}else{
-				p.setBounds(insets.left+250, insets.top+300, p.getWidth(), p.getHeight());
+				p.setBounds(insets.left+310, insets.top+250, 400, 400);
 			}
+			System.out.println(p.getWidth()+", "+p.getHeight());
 			add(p);
 		}
-		
-		setComponentZOrder(background, 8);
+		int compsMax = 9;
+		setComponentZOrder(background, compsMax);
 		for(int i=0;i<5;i++){
-			setComponentZOrder(dealtCards.get(i), 7-i);
+			setComponentZOrder(dealtCards.get(i), compsMax-1-i);
 		}
 		for(int i=0;i<3;i++){
-			setComponentZOrder(players.get(i), i);
+			setComponentZOrder(players.get(i), compsMax-6-i);
 		}
+		setComponentZOrder(action, compsMax-9);
 		
 	}
 	public void setupListeners(){
@@ -98,6 +104,23 @@ public class PokerTable extends JPanel {
 		p.setIsDealer(isDealer);
 	}
 	public void displayState(State state) {
+		if(state.getAction() == null){
+			action.setText("");
+		}else {
+			action.setText(state.getAction().getLine());
+		}
+		// Show cards of players
+		List<Card[]> pcards = new ArrayList<Card[]>();
+		pcards.add(state.getP1());
+		pcards.add(state.getP2());
+		pcards.add(state.getP3());
+		
+		for(int i=0;i<players.size(); i++){
+			System.out.println(""+i+". "+players.get(i));
+			Player p = players.get(i);
+			p.setCards(pcards.get(i));
+		}
+		
 		// Clear out old cards.
 		for(JLabel c : dealtCards){
 			c.setIcon(null);
@@ -114,7 +137,6 @@ public class PokerTable extends JPanel {
 			if(cardImg != null)
 				dealtCards.get(i).setIcon(new ImageIcon(cardImg));
 		}
-		System.out.println("I will display "+state);
 	}
 	public void setPlayers(Map<String, Integer> map) {
 		System.out.println("Name in map: "+map.keySet().size()+": ");
